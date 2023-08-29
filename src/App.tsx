@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import styled from 'styled-components';
+import Header from './layouts/Header';
+import useAuth from './hooks/useAuth';
+import AlertBox from './components/molecules/AlertBox';
+import AnimatedRoutes from './pages/routes/animatedRoutes';
+import AppBackground from './components/organisms/AppBackground';
+import background from './assets/background.jpg';
+
+const AppContainer = styled.div`
+width: 100%;
+position: relative;
+overflow-x: hidden;
+min-height: 100vh;
+`;
 
 function App() {
+
+  useAuth();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+      <BrowserRouter>
+        <Header />
+        <AlertBox />
+        <AppBackground src={background} />
+        <AnimatedRoutes />
+      </BrowserRouter>
+    </AppContainer>
   );
 }
 
