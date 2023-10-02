@@ -23,7 +23,7 @@ interface RemoveNode {
 
 export const tabs = ({setTabs}: {setTabs: React.Dispatch<React.SetStateAction<Tab[]>>}) => {
 
-    axiosInstance.get('/api/tabs')
+    axiosInstance.get('api/tabs')
     .then((res) => {
         setTabs(res.data);
     })

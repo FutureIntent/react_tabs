@@ -7,7 +7,6 @@ import WrappedAlert from "../components/molecules/AlertWrapper";
 import MUIAlert from "../components/atoms/Alert";
 import useRedirect from "../hooks/useRedirect";
 import { whitespace } from "../helpers/text";
-import useResize from "../hooks/useResize";
 import background from "./../assets/login.jpg";
 import PageAnimation from "../animations/pageAnimation";
 
@@ -16,15 +15,12 @@ export interface InputInterface {
     password: string
 }
 
-const LoginContainer = styled.div.attrs<{windowheight: number}>(({windowheight}) => ({
-    style: {
-        height: `calc(${windowheight}px - var(--header-height))`
-    }
-}))`
+const LoginContainer = styled.div`
 width: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
+height: calc(100vh - var(--header-height));
 min-height: 316px;
 background-image: url(${background});
 background-position: center;
@@ -36,7 +32,6 @@ background-size: cover;
 const Login = () => {
 
     useRedirect();
-    const { height } = useResize();
 
     const {
         register,
@@ -62,7 +57,7 @@ const Login = () => {
 
     return (
         <PageAnimation>
-            <LoginContainer windowheight={height}>
+            <LoginContainer>
                 <Form onSubmit={handleSubmit((data) => submitLogin(data, setError, clearErrors))} errors={errors} style={{
                     overflowY: 'auto',
                     overflowX: 'hidden',

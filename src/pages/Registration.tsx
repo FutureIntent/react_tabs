@@ -7,7 +7,6 @@ import MUIInput from "../components/atoms/Input";
 import WrappedAlert from "../components/molecules/AlertWrapper";
 import MUIAlert from "../components/atoms/Alert";
 import { whitespace } from "../helpers/text";
-import useResize from "../hooks/useResize";
 import background from './../assets/register.jpg';
 import PageAnimation from "../animations/pageAnimation";
 
@@ -18,15 +17,12 @@ export interface InputInterface {
     password_confirmation: string
 }
 
-const RegistrationContainer = styled.div.attrs<{windowheight: number}>(({windowheight}) => ({
-    style: {
-        height: `calc(${windowheight}px - var(--header-height))`
-    }
-}))`
+const RegistrationContainer = styled.div`
 width: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
+height: calc(100vh - var(--header-height));
 min-height: 316px;
 background-image: url(${background});
 background-position: center;
@@ -37,7 +33,6 @@ background-size: cover;
 const Registration = () => {
 
     useRedirect();
-    const { height } = useResize();
 
     // useEffect(() => {
     //     register({
@@ -66,7 +61,7 @@ const Registration = () => {
 
     return (
         <PageAnimation>
-            <RegistrationContainer windowheight={height}>
+            <RegistrationContainer>
                 <Form onSubmit={handleSubmit((data) => submitRegistration(data, setError, clearErrors))} errors={errors} style={{
                     overflowY: 'auto',
                     overflowX: 'hidden',
